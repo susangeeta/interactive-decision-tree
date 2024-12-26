@@ -1,30 +1,19 @@
-let currentStepIndex = 1; // Start at the first step
-const totalSteps = 3; // Total number of steps
+let currentStepIndex = 1;
+const totalSteps = 3;
 
-// Go to the next step
-function goToNextStep(nextStepId) {
-  const currentStep = document.querySelector(".form-step:not(.hidden)");
-  const selectElement = currentStep.querySelector("select");
+function goToNextStep(stepId) {
+  let totalSteps = 3;
+  let currentStep = parseInt(stepId.replace("step", ""));
+  let progressWidth = (currentStep / totalSteps) * 100;
+  document.querySelector(".progress").style.width = progressWidth + "%";
 
-  // Validate the current step's selection
-  if (selectElement && !selectElement.value) {
-    alert("Please select an option to proceed.");
-    return;
-  }
-
-  // Hide the current step and show the next step
-  currentStep.classList.add("hidden");
-  document.getElementById(nextStepId).classList.remove("hidden");
-
-  currentStepIndex++;
-  updateProgressBar();
+  document.getElementById(stepId).classList.remove("hidden");
+  document.getElementById("step" + (currentStep - 1)).classList.add("hidden");
 }
 
-// Go to the previous step
 function goToPreviousStep(previousStepId) {
   const currentStep = document.querySelector(".form-step:not(.hidden)");
 
-  // Hide the current step and show the previous step
   currentStep.classList.add("hidden");
   document.getElementById(previousStepId).classList.remove("hidden");
 
@@ -32,19 +21,16 @@ function goToPreviousStep(previousStepId) {
   updateProgressBar();
 }
 
-// Generate recommendation based on user selections
 function generateRecommendation() {
   const preference = document.getElementById("preference").value;
   const activity = document.getElementById("activity").value;
   const budget = document.getElementById("budget").value;
 
-  // Validate that all selections are complete
   if (!preference || !activity || !budget) {
     alert("Please complete all selections.");
     return;
   }
 
-  // Recommendation logic
   const recommendations = {
     beach: {
       adventure: {
@@ -77,7 +63,6 @@ function generateRecommendation() {
     recommendations[preference]?.[activity]?.[budget] ||
     "We couldn't find a match for your preferences.";
 
-  // Display the recommendation
   document.getElementById("result").textContent = recommendation;
   document.querySelector(".form-step:not(.hidden)").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
@@ -85,7 +70,6 @@ function generateRecommendation() {
   updateProgressBar(true); // Progress bar is full on completion
 }
 
-// Update progress bar dynamically
 function updateProgressBar(isFinalStep = false) {
   const progressPercentage = isFinalStep
     ? 100
@@ -94,7 +78,6 @@ function updateProgressBar(isFinalStep = false) {
   const progress = document.querySelector(".progress");
   progress.style.width = `${progressPercentage}%`;
 
-  // If the progress reaches 100%, apply the green color
   if (progressPercentage === 100) {
     progress.classList.add("completed");
   }

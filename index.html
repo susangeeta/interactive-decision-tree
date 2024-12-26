@@ -10,55 +10,63 @@
     <div class="container">
       <h1>Interactive Decision Tree</h1>
 
-      <!-- Progress Bar -->
       <div class="progress-bar">
         <div class="progress"></div>
       </div>
 
-      <!-- Step 1 -->
       <div class="form-step" id="step1">
         <label for="preference"
           >Do you prefer the mountains or the beach?</label
         >
-        <select id="preference">
-          <option value="">Select...</option>
-          <option value="mountains">Mountains</option>
-          <option value="beach">Beach</option>
-        </select>
-        <button class="next-btn" onclick="goToNextStep('step2')">Next</button>
+        <div class="flex-container">
+          <select id="preference">
+            <option value="">Select...</option>
+            <option value="mountains">Mountains</option>
+            <option value="beach">Beach</option>
+          </select>
+        </div>
+        <div class="button-container">
+          <button class="next-btn" onclick="goToNextStep('step2')">Next</button>
+        </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="form-step hidden" id="step2">
         <label for="activity"
           >Are you looking for adventure or relaxation?</label
         >
-        <select id="activity">
-          <option value="">Select...</option>
-          <option value="adventure">Adventure</option>
-          <option value="relaxation">Relaxation</option>
-        </select>
-        <button class="next-btn" onclick="goToNextStep('step3')">Next</button>
-        <button class="back-btn" onclick="goToPreviousStep('step1')">
-          Back
-        </button>
+        <div class="flex-container">
+          <select id="activity">
+            <option value="">Select...</option>
+            <option value="adventure">Adventure</option>
+            <option value="relaxation">Relaxation</option>
+          </select>
+        </div>
+        <div class="button-container">
+          <button class="next-btn" onclick="goToNextStep('step3')">Next</button>
+          <button class="back-btn" onclick="goToPreviousStep('step1')">
+            Back
+          </button>
+        </div>
       </div>
 
-      <!-- Step 3 -->
       <div class="form-step hidden" id="step3">
         <label for="budget">What’s your budget?</label>
-        <select id="budget">
-          <option value="">Select...</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-        <button class="next-btn" onclick="generateRecommendation()">
-          Get Recommendation
-        </button>
-        <button class="back-btn" onclick="goToPreviousStep('step2')">
-          Back
-        </button>
+        <div class="flex-container">
+          <select id="budget">
+            <option value="">Select...</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div class="button-container">
+          <button class="next-btn" onclick="generateRecommendation()">
+            Get Recommendation
+          </button>
+          <button class="back-btn" onclick="goToPreviousStep('step2')">
+            Back
+          </button>
+        </div>
       </div>
 
       <div class="result hidden" id="result"></div>
